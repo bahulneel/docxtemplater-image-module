@@ -1,4 +1,4 @@
-SubContent=require('../node_modules/docxtemplater/js/subContent.js')
+SubContent=require('./subContent')
 ImgManager=require('./imgManager')
 fs=require('fs')
 
