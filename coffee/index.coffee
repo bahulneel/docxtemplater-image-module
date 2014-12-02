@@ -29,7 +29,7 @@ class ImageModule
 
 			tag = templaterState.textInsideTag.substr(1)
 			imgName=scopeManager.getValueFromScope(tag)
-			if imgName=='undefined' then throw new Error "imageName is undefined for:#{tag}"
+			if imgName=='undefined' then return
 			try
 				imgData=fs.readFileSync(imgName)
 			catch e
