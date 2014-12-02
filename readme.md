@@ -33,3 +33,11 @@ Your docx should contain the text: `{%image}`
 # Notice
 
  For the imagereplacer to work, the image tag: `{%image}` need to be in its own `<w:p>`, so that means that you have to put a new line after and before the tag.
+
+# Building
+
+ You can build the coffee into js by running `gulp` (this will watch the directory for changes)
+
+# Testing
+
+You can test that everything works fine using the command `mocha`. This will also create 3 docx files under the root directory that you can open to check if the docx are correct
