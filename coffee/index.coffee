@@ -43,7 +43,7 @@ class ImageModule
 				subContent=new SubContent(xmlTemplater.content)
 					.getInnerTag(templaterState)
 					.getOuterXml('w:t')
-				newText=@getImageXml(rId,"description")
+				newText=@getImageXml(rId)
 			if @options.centered==true
 				subContent=new SubContent(xmlTemplater.content)
 					.getInnerTag(templaterState)
@@ -52,13 +52,13 @@ class ImageModule
 
 			xmlTemplater.replaceXml(subContent,newText)
 		null
-	getImageXml:(rId,imageDescription="")->
+	getImageXml:(rId)->
 		return """
         <w:drawing>
           <wp:inline distT="0" distB="0" distL="0" distR="0">
             <wp:extent cx="1905000" cy="1905000"/>
             <wp:effectExtent l="0" t="0" r="0" b="0"/>
-            <wp:docPr id="2" name="Image 2" descr="#{imageDescription}"/>
+            <wp:docPr id="2" name="Image 2" descr="image"/>
             <wp:cNvGraphicFramePr>
               <a:graphicFrameLocks xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" noChangeAspect="1"/>
             </wp:cNvGraphicFramePr>
@@ -66,7 +66,7 @@ class ImageModule
               <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
                 <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
                   <pic:nvPicPr>
-                    <pic:cNvPr id="0" name="Picture 1" descr="#{imageDescription}"/>
+                    <pic:cNvPr id="0" name="Picture 1" descr="image"/>
                     <pic:cNvPicPr>
                       <a:picLocks noChangeAspect="1" noChangeArrowheads="1"/>
                     </pic:cNvPicPr>
