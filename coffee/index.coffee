@@ -48,7 +48,7 @@ class ImageModule
 
 			xmlTemplater.replaceXml(subContent,newText)
 		null
-	getImageXml:(rId="1",imageDescription="")->
+	getImageXml:(rId,imageDescription="")->
 		return """
         <w:drawing>
           <wp:inline distT="0" distB="0" distL="0" distR="0">
@@ -99,7 +99,7 @@ class ImageModule
           </wp:inline>
         </w:drawing>
 		"""
-	getImageXmlCentered:(rId="1")->
+	getImageXmlCentered:(rId)->
 		"""
 		<w:p>
 		  <w:pPr>
@@ -135,7 +135,7 @@ class ImageModule
 						</pic:cNvPicPr>
 					  </pic:nvPicPr>
 					  <pic:blipFill>
-						<a:blip r:embed="rId2"/>
+						<a:blip r:embed="rId#{rId}"/>
 						<a:stretch>
 						  <a:fillRect/>
 						</a:stretch>
