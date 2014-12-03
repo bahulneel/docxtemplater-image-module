@@ -21,6 +21,13 @@ class ImageModule
 		name="image_generated_#{@imageNumber}.png"
 		@imageNumber++
 		name
+	replaceByNothing:()->
+		xmlTemplater=@manager.getInstance('xmlTemplater')
+		subContent=new SubContent(xmlTemplater.content)
+			.getInnerTag(templaterState)
+			.getOuterXml('w:t')
+
+		xmlTemplater.replaceXml(subContent,'<w:t></w:t>')
 	handle:(type,data)->
 		if type=='replaceTag' and data=='image'
 			scopeManager=@manager.getInstance('scopeManager')
@@ -29,11 +36,12 @@ class ImageModule
 
 			tag = templaterState.textInsideTag.substr(1)
 			imgName=scopeManager.getValueFromScope(tag)
-			if imgName=='undefined' then return
+
+			if imgName=='undefined' then return @replaceByNothing()
 			try
 				imgData=fs.readFileSync(imgName)
 			catch e
-				return
+				return @replaceByNothing()
 
 			rId=@imgManager
 				.loadImageRels()
