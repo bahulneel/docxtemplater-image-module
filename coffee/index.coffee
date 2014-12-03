@@ -33,8 +33,7 @@ class ImageModule
 			try
 				imgData=fs.readFileSync(imgName)
 			catch e
-				console.error "image not defined #{imgName}"
-				throw e
+				return
 
 			rId=@imgManager
 				.loadImageRels()
