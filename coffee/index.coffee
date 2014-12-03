@@ -40,10 +40,14 @@ class ImageModule
 				.addImageRels(@getNextImageName(),imgData)
 
 			if @options.centered==false
-				subContent=new SubContent(xmlTemplater.content).getInnerTag(templaterState).getOuterXml('w:t')
+				subContent=new SubContent(xmlTemplater.content)
+					.getInnerTag(templaterState)
+					.getOuterXml('w:t')
 				newText=@getImageXml(rId,"description")
 			if @options.centered==true
-				subContent=new SubContent(xmlTemplater.content).getInnerTag(templaterState).getOuterXml('w:p')
+				subContent=new SubContent(xmlTemplater.content)
+					.getInnerTag(templaterState)
+					.getOuterXml('w:p')
 				newText=@getImageXmlCentered(rId)
 
 			xmlTemplater.replaceXml(subContent,newText)
