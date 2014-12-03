@@ -107,28 +107,14 @@ class ImageModule
 		"""
 		<w:p>
 		  <w:pPr>
-			<w:pStyle w:val="Normal"/>
 			<w:jc w:val="center"/>
-			<w:rPr/>
 		  </w:pPr>
 		  <w:r>
 			<w:rPr/>
 			<w:drawing>
-			  <wp:anchor behindDoc="0" distT="0" distB="0" distL="0" distR="0" simplePos="0" locked="0" layoutInCell="1" allowOverlap="1" relativeHeight="0">
-				<wp:simplePos x="0" y="0"/>
-				<wp:positionH relativeFrom="column">
-				  <wp:align>center</wp:align>
-				</wp:positionH>
-				<wp:positionV relativeFrom="paragraph">
-				  <wp:align>top</wp:align>
-				</wp:positionV>
+			  <wp:inline distT="0" distB="0" distL="0" distR="0">
 				<wp:extent cx="2060575" cy="1939290"/>
-				<wp:effectExtent l="0" t="0" r="0" b="0"/>
-				<wp:wrapSquare wrapText="largest"/>
 				<wp:docPr id="0" name="Picture" descr=""/>
-				<wp:cNvGraphicFramePr>
-				  <a:graphicFrameLocks xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" noChangeAspect="1"/>
-				</wp:cNvGraphicFramePr>
 				<a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
 				  <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
 					<pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
@@ -163,7 +149,7 @@ class ImageModule
 					</pic:pic>
 				  </a:graphicData>
 				</a:graphic>
-			  </wp:anchor>
+			  </wp:inline>
 			</w:drawing>
 		  </w:r>
 		</w:p>
