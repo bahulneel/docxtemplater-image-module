@@ -21,44 +21,39 @@ class ImageModule
 		name="image_generated_#{@imageNumber}.png"
 		@imageNumber++
 		name
-	replaceByNothing:()->
+	replaceBy:(text,outsideElement)->
 		xmlTemplater=@manager.getInstance('xmlTemplater')
+		templaterState=@manager.getInstance('templaterState')
 		subContent=new SubContent(xmlTemplater.content)
 			.getInnerTag(templaterState)
-			.getOuterXml('w:t')
-
-		xmlTemplater.replaceXml(subContent,'<w:t></w:t>')
+			.getOuterXml(outsideElement)
+		xmlTemplater.replaceXml(subContent,text)
 	handle:(type,data)->
 		if type=='replaceTag' and data=='image'
 			scopeManager=@manager.getInstance('scopeManager')
-			xmlTemplater=@manager.getInstance('xmlTemplater')
 			templaterState=@manager.getInstance('templaterState')
 
 			tag = templaterState.textInsideTag.substr(1)
 			imgName=scopeManager.getValueFromScope(tag)
 
-			if imgName=='undefined' then return @replaceByNothing()
+			if imgName=='undefined' then return @replaceBy('<w:t></w:t>','w:t')
 			try
 				imgData=fs.readFileSync(imgName)
 			catch e
-				return @replaceByNothing()
+				return @replaceBy('<w:t></w:t>','w:t')
 
 			rId=@imgManager
 				.loadImageRels()
 				.addImageRels(@getNextImageName(),imgData)
 
 			if @options.centered==false
-				subContent=new SubContent(xmlTemplater.content)
-					.getInnerTag(templaterState)
-					.getOuterXml('w:t')
+				outsideElement='w:t'
 				newText=@getImageXml(rId)
 			if @options.centered==true
-				subContent=new SubContent(xmlTemplater.content)
-					.getInnerTag(templaterState)
-					.getOuterXml('w:p')
+				outsideElement='w:p'
 				newText=@getImageXmlCentered(rId)
 
-			xmlTemplater.replaceXml(subContent,newText)
+			@replaceBy(newText,outsideElement)
 		null
 	getImageXml:(rId)->
 		return """
