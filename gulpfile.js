@@ -1,12 +1,7 @@
 var gulp = require('gulp');
-var gutil = require('gulp-util');
 var watch= require('gulp-watch');
-var rename= require('gulp-rename');
 var coffee= require('gulp-coffee');
-var concat= require('gulp-concat');
 var uglify= require('gulp-uglify');
-var spawn = require('child_process').spawn;
-var server=null;
 
 var config={uglify:false}
 
