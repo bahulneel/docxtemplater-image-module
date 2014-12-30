@@ -28,6 +28,10 @@ class ImageModule
 			.getInnerTag(templaterState)
 			.getOuterXml(outsideElement)
 		xmlTemplater.replaceXml(subContent,text)
+	convertPixelsToEmus:(pixel)->
+		Math.round(pixel * 9525)
+	getSizeFromData:(imgData)->
+		[150,150]
 	handle:(type,data)->
 		if type=='replaceTag' and data=='image'
 			scopeManager=@manager.getInstance('scopeManager')
@@ -41,25 +45,27 @@ class ImageModule
 				imgData=fs.readFileSync(imgName)
 			catch e
 				return @replaceBy('<w:t></w:t>','w:t')
-
 			rId=@imgManager
 				.loadImageRels()
 				.addImageRels(@getNextImageName(),imgData)
 
+			sizePixel=@getSizeFromData(imgData)
+			size=[@convertPixelsToEmus(sizePixel[0]),@convertPixelsToEmus(sizePixel[1])]
+
 			if @options.centered==false
 				outsideElement='w:t'
-				newText=@getImageXml(rId)
+				newText=@getImageXml(rId,size)
 			if @options.centered==true
 				outsideElement='w:p'
-				newText=@getImageXmlCentered(rId)
+				newText=@getImageXmlCentered(rId,size)
 
 			@replaceBy(newText,outsideElement)
 		null
-	getImageXml:(rId)->
+	getImageXml:(rId,size)->
 		return """
         <w:drawing>
           <wp:inline distT="0" distB="0" distL="0" distR="0">
-            <wp:extent cx="1905000" cy="1905000"/>
+            <wp:extent cx="#{size[0]}" cy="#{size[1]}"/>
             <wp:effectExtent l="0" t="0" r="0" b="0"/>
             <wp:docPr id="2" name="Image 2" descr="image"/>
             <wp:cNvGraphicFramePr>
@@ -106,7 +112,7 @@ class ImageModule
           </wp:inline>
         </w:drawing>
 		"""
-	getImageXmlCentered:(rId)->
+	getImageXmlCentered:(rId,size)->
 		"""
 		<w:p>
 		  <w:pPr>
@@ -116,7 +122,7 @@ class ImageModule
 			<w:rPr/>
 			<w:drawing>
 			  <wp:inline distT="0" distB="0" distL="0" distR="0">
-				<wp:extent cx="2060575" cy="1939290"/>
+				<wp:extent cx="#{size[0]}" cy="#{size[1]}"/>
 				<wp:docPr id="0" name="Picture" descr=""/>
 				<a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
 				  <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
