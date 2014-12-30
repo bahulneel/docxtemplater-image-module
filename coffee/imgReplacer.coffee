@@ -1,4 +1,4 @@
-DocUtils=require('./docUtils')
+DocUtils=require('docxtemplater').DocUtils
 DocxQrCode=require('./docxQrCode')
 PNG=require('png-js')
 JSZip=require('jszip')

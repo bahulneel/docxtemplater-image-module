@@ -16,7 +16,7 @@
   "author": "Edgar Hipp",
   "license": "MIT",
   "dependencies": {
-    "docxtemplater": "^1.0.0-beta.2",
+    "docxtemplater": "^1.0.1",
     "gulp-browserify": "^0.5.0",
     "png-js": "^0.1.1",
     "qrcode-reader": "0.0.5",

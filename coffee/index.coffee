@@ -1,4 +1,4 @@
-SubContent=require('./subContent')
+SubContent=require('docxtemplater').SubContent
 ImgManager=require('./imgManager')
 fs=require('fs')
 

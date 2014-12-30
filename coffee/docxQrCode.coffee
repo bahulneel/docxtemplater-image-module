@@ -1,5 +1,5 @@
-DocUtils=require('./docUtils')
-DocXTemplater=require('./docxTemplater')
+DocXTemplater=require('docxtemplater')
+DocUtils=DocXTemplater.DocUtils
 
 vm=require('vm')
 JSZip=require('jszip')
