@@ -30,6 +30,22 @@ Your docx should contain the text: `{%image}`
 
  You can center the images using new ImageModule({centered:true}) instead
 
+## Size
+
+You can set the size of the image to what ever you want in pixel. By default it will be 150x150.
+One of the most useful cases of this is to set the images to be the size of that image.
+
+For this, you will need to install the [npm package ‘image-size’](https://www.npmjs.com/package/image-size)
+then, write:
+
+    imageModule=new ImageModule({centered:false})
+    imageModule.getSizeFromData=function(imgData) {
+       sizeOf=require('image-size');
+       sizeObj=sizeOf(imgData);
+       console.log(sizeObj);
+       return [sizeObj.width,sizeObj.height];
+    }
+
 # Notice
 
  For the imagereplacer to work, the image tag: `{%image}` need to be in its own `<w:p>`, so that means that you have to put a new line after and before the tag.
