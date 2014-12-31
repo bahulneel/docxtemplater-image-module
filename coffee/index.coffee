@@ -96,7 +96,7 @@ class ImageModule
                   <pic:spPr bwMode="auto">
                     <a:xfrm>
                       <a:off x="0" y="0"/>
-                      <a:ext cx="1905000" cy="1905000"/>
+                      <a:ext cx="#{size[0]}" cy="#{size[1]}"/>
                     </a:xfrm>
                     <a:prstGeom prst="rect">
                       <a:avLst/>
@@ -142,7 +142,7 @@ class ImageModule
 					  <pic:spPr bwMode="auto">
 						<a:xfrm>
 						  <a:off x="0" y="0"/>
-						  <a:ext cx="2060575" cy="1939290"/>
+						  <a:ext cx="#{size[0]}" cy="#{size[1]}"/>
 						</a:xfrm>
 						<a:prstGeom prst="rect">
 						  <a:avLst/>
