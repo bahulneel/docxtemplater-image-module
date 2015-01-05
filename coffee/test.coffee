@@ -5,6 +5,7 @@ expect=require('chai').expect
 fileNames=[
 	'imageExample.docx',
 	'imageLoopExample.docx',
+	'imageInlineExample.docx',
 ]
 
 ImageModule=require('../js/index.js')
@@ -119,3 +120,16 @@ describe 'image adding with {% image} syntax', ()->
 
 		buffer=zip.generate({type:"nodebuffer"})
 		fs.writeFile("test_multi.docx",buffer);
+
+	it 'should work with inline images',()->
+		name='imageInlineExample.docx'
+
+		imageModule=new ImageModule()
+		docX[name].attachModule(imageModule)
+
+		out=docX[name]
+			.load(docX[name].loadedContent)
+			.setData({firefox:'examples/image2.png'})
+
+		out
+			.render()
