@@ -32,24 +32,26 @@ class ImageModule
 		Math.round(pixel * 9525)
 	getSizeFromData:(imgData)->
 		[150,150]
+	getImageFromData:(imgData)->
+		fs.readFileSync(imgData)
 	handle:(type,data)->
 		if type=='replaceTag' and data=='image'
 			scopeManager=@manager.getInstance('scopeManager')
 			templaterState=@manager.getInstance('templaterState')
 
 			tag = templaterState.textInsideTag.substr(1)
-			imgName=scopeManager.getValueFromScope(tag)
+			imgData=scopeManager.getValueFromScope(tag)
 
-			if imgName=='undefined' then return @replaceBy('<w:t></w:t>','w:t')
+			if imgData=='undefined' then return @replaceBy('<w:t></w:t>','w:t')
 			try
-				imgData=fs.readFileSync(imgName)
+				imgBuffer=@getImageFromData(imgData)
 			catch e
 				return @replaceBy('<w:t></w:t>','w:t')
 			rId=@imgManager
 				.loadImageRels()
-				.addImageRels(@getNextImageName(),imgData)
+				.addImageRels(@getNextImageName(),imgBuffer)
 
-			sizePixel=@getSizeFromData(imgData)
+			sizePixel=@getSizeFromData(imgBuffer)
 			size=[@convertPixelsToEmus(sizePixel[0]),@convertPixelsToEmus(sizePixel[1])]
 
 			if @options.centered==false
